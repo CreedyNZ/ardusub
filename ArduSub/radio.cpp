@@ -139,9 +139,9 @@ void Sub::transform_manual_control_to_rc_override(int16_t x, int16_t y, int16_t 
 	static bool lightsBrighter = true;
 
 	// Button logic to arm/disarm motors (Start and back buttons)
-	if ( buttons & (1 << 4) ) {
+	if ( buttons & (1 << 7) ) {
 		init_arm_motors(true);
-	} else if ( buttons & (1 << 5) ) {
+	} else if ( buttons & (1 << 6) ) {
 		init_disarm_motors();
 	}
 
@@ -155,21 +155,21 @@ void Sub::transform_manual_control_to_rc_override(int16_t x, int16_t y, int16_t 
 	}
 
 	// Button logic for roll trim (D-pad left and right)
-	if ( (buttons & ( 1 << 2 )) && rollTrim > -200 ) {
+	if ( (buttons & ( 1 << 4 )) && rollTrim > -200 ) {
 		rollTrim -= 10;
-	} else if ( (buttons & ( 1 << 3 )) && rollTrim < 200 ) {
+	} else if ( (buttons & ( 1 << 5 )) && rollTrim < 200 ) {
 		rollTrim += 10;
 	}
 
 	// Button logic for mode changes (B for stabilize, Y for altitude hold)
-	if ( buttons & (1 << 14) ) {
+	if ( buttons & (1 << 3) ) {
 		mode = 2000;
-	} else if ( buttons & (1 << 12)) {
+	} else if ( buttons & (1 << 1)) {
 		mode = 1000;
 	}
 
 	// Button logic for lights with cyclical dimming (right joystick click)
-	if ( (buttons & (1 << 7)) && (tnow_ms - lastLights > 100) ) {
+	if ( (buttons & (1 << 10)) && (tnow_ms - lastLights > 100) ) {
 		lastLights = tnow_ms;
 
 		if ( lightsBrighter ) {
